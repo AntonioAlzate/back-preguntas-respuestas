@@ -12,6 +12,7 @@ public class Question {
     private String question;
     private String type;
     private String category;
+    private String ownerEmail;
 
 
     public String getId() {
@@ -42,6 +43,14 @@ public class Question {
         return type;
     }
 
+    public String getOwnerEmail() {
+        return ownerEmail;
+    }
+
+    public void setOwnerEmail(String ownerEmail) {
+        this.ownerEmail = ownerEmail;
+    }
+
     public void setType(String type) {
         this.type = type;
     }
@@ -53,4 +62,6 @@ public class Question {
     public void setCategory(String category) {
         this.category = category;
     }
+
+
 }

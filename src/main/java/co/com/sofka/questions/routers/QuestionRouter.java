@@ -1,6 +1,7 @@
 package co.com.sofka.questions.routers;
 
 import co.com.sofka.questions.model.AnswerDTO;
+import co.com.sofka.questions.model.EmailDTO;
 import co.com.sofka.questions.model.QuestionDTO;
 import co.com.sofka.questions.usecases.*;
 import org.springframework.context.annotation.Bean;
@@ -37,13 +38,13 @@ public class QuestionRouter {
                         .body(BodyInserters.fromPublisher(
                                 ownerListUseCase.apply(request.pathVariable("userId")),
                                 QuestionDTO.class
-                         ))
+                        ))
         );
     }
 
     @Bean
     public RouterFunction<ServerResponse> create(CreateUseCase createUseCase) {
-        Function<QuestionDTO, Mono<ServerResponse>> executor = questionDTO ->  createUseCase.apply(questionDTO)
+        Function<QuestionDTO, Mono<ServerResponse>> executor = questionDTO -> createUseCase.apply(questionDTO)
                 .flatMap(result -> ServerResponse.ok()
                         .contentType(MediaType.TEXT_PLAIN)
                         .bodyValue(result));
@@ -61,7 +62,7 @@ public class QuestionRouter {
                 request -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(BodyInserters.fromPublisher(getUseCase.apply(
-                                request.pathVariable("id")),
+                                        request.pathVariable("id")),
                                 QuestionDTO.class
                         ))
         );
@@ -96,6 +97,17 @@ public class QuestionRouter {
                 request -> ServerResponse.accepted()
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(BodyInserters.fromPublisher(deleteAnswerUseCase.apply(request.pathVariable("id")), Void.class))
+        );
+    }
+
+    @Bean
+    public RouterFunction<ServerResponse> sendEmail(SendEmailUseCase sendEmailUseCase) {
+        return route(POST("/send/email").and(accept(MediaType.APPLICATION_JSON)),
+                request -> request.bodyToMono(EmailDTO.class)
+                        .flatMap(emailDTO -> sendEmailUseCase.apply(emailDTO))
+                        .flatMap(result -> ServerResponse.ok()
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .bodyValue(result))
         );
     }
 }
