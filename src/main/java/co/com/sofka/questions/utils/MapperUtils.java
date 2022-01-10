@@ -1,9 +1,11 @@
 package co.com.sofka.questions.utils;
 
 import co.com.sofka.questions.collections.Answer;
+import co.com.sofka.questions.collections.Favorite;
 import co.com.sofka.questions.collections.Profile;
 import co.com.sofka.questions.collections.Question;
 import co.com.sofka.questions.model.AnswerDTO;
+import co.com.sofka.questions.model.FavoriteDTO;
 import co.com.sofka.questions.model.ProfileDTO;
 import co.com.sofka.questions.model.QuestionDTO;
 import org.springframework.stereotype.Component;
@@ -77,6 +79,24 @@ public class MapperUtils {
             profile.setApellidos(profileDTO.getApellidos());
             profile.setCorreo(profileDTO.getCorreo());
             return profile;
+        };
+    }
+
+    public Function<Favorite, FavoriteDTO> mapEntityToFavoriteDTO(){
+        return favorite -> new FavoriteDTO(
+                favorite.getId(),
+                favorite.getUserId(),
+                favorite.getQuestionId()
+        );
+    }
+
+    public Function<FavoriteDTO, Favorite> mapperToFavorite() {
+        return favoriteDTO -> {
+            Favorite favorite = new Favorite();
+            favorite.setId(favoriteDTO.getId());
+            favorite.setUserId(favoriteDTO.getUserId());
+            favorite.setQuestionId(favoriteDTO.getQuestionId());
+            return favorite;
         };
     }
 }
