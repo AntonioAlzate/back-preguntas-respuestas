@@ -1,15 +1,13 @@
 package co.com.sofka.questions.model;
 
 
-import org.springframework.data.annotation.Id;
-
 import javax.validation.constraints.NotBlank;
 import java.util.Objects;
 import java.util.Optional;
 
 public class AnswerDTO {
 
-    private  String id;
+    private String id;
     @NotBlank(message = "Debe existir el userId para este objeto")
     private String userId;
     @NotBlank

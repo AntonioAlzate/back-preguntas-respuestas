@@ -1,6 +1,5 @@
 package co.com.sofka.questions.usecases;
 
-import co.com.sofka.questions.collections.Question;
 import co.com.sofka.questions.model.ProfileDTO;
 import co.com.sofka.questions.reposioties.ProfileRepository;
 import co.com.sofka.questions.utils.MapperUtils;
@@ -12,7 +11,7 @@ import java.util.Objects;
 
 @Service
 @Validated
-public class UpdateProfileUseCase implements SaveProfile{
+public class UpdateProfileUseCase implements SaveProfile {
 
     private final ProfileRepository profileRepository;
     private final MapperUtils mapperUtils;

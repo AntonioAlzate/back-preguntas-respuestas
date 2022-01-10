@@ -60,7 +60,7 @@ public class MapperUtils {
         );
     }
 
-    public Function<Profile, ProfileDTO> mapEntityToProfileDTO(){
+    public Function<Profile, ProfileDTO> mapEntityToProfileDTO() {
         return profile -> new ProfileDTO(
                 profile.getId(),
                 profile.getUserId(),
@@ -82,7 +82,7 @@ public class MapperUtils {
         };
     }
 
-    public Function<Favorite, FavoriteDTO> mapEntityToFavoriteDTO(){
+    public Function<Favorite, FavoriteDTO> mapEntityToFavoriteDTO() {
         return favorite -> new FavoriteDTO(
                 favorite.getId(),
                 favorite.getUserId(),

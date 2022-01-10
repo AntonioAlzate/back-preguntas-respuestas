@@ -1,7 +1,9 @@
 package co.com.sofka.questions.routers;
 
 import co.com.sofka.questions.model.FavoriteDTO;
-import co.com.sofka.questions.usecases.*;
+import co.com.sofka.questions.usecases.AddFavoriteUseCase;
+import co.com.sofka.questions.usecases.DeleteFavoriteUseCase;
+import co.com.sofka.questions.usecases.FavoriteUserListUseCase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;

@@ -9,7 +9,7 @@ import reactor.core.publisher.Mono;
 
 @Service
 @Validated
-public class AddFavoriteUseCase implements SaveFavorite{
+public class AddFavoriteUseCase implements SaveFavorite {
 
     private final FavoriteRepository favoriteRepository;
     private final MapperUtils mapperUtils;
@@ -24,7 +24,7 @@ public class AddFavoriteUseCase implements SaveFavorite{
 
         return favoriteRepository.existsByUserIdAndQuestionId(favoriteDTO.getUserId(), favoriteDTO.getQuestionId())
                 .flatMap(result -> {
-                    if(result){
+                    if (result) {
                         return Mono.error(new RuntimeException("Esta pregunta ya esta registrada como favorita de este usuario"));
                     }
                     return favoriteRepository.save(mapperUtils.mapperToFavorite().apply(favoriteDTO))
