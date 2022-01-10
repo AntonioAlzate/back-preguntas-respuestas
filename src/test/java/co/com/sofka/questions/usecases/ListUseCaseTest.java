@@ -5,34 +5,32 @@ import co.com.sofka.questions.reposioties.QuestionRepository;
 import co.com.sofka.questions.utils.MapperUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import reactor.core.publisher.Flux;
 import reactor.test.StepVerifier;
-
 
 import static org.mockito.Mockito.*;
 
 class ListUseCaseTest {
 
-     QuestionRepository repository;
-     ListUseCase listUseCase;
+    QuestionRepository repository;
+    ListUseCase listUseCase;
 
 
     @BeforeEach
-    public void setup(){
+    public void setup() {
         MapperUtils mapperUtils = new MapperUtils();
         repository = mock(QuestionRepository.class);
         listUseCase = new ListUseCase(mapperUtils, repository);
     }
 
     @Test
-     void getValidationTest(){
-        Question question =  new Question();
+    void getValidationTest() {
+        Question question = new Question();
         question.setUserId("xxxx-xxxx");
         question.setType("tech");
         question.setCategory("software");
         question.setQuestion("¿Que es java?");
-        when(repository.findAll()).thenReturn(Flux.just(question ));
+        when(repository.findAll()).thenReturn(Flux.just(question));
 
         StepVerifier.create(listUseCase.get())
                 .expectNextMatches(questionDTO -> {
